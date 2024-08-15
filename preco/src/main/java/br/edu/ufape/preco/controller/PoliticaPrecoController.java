@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ufape.catalogo.model.Produto;
-import br.edu.ufape.catalogo.service.interfaces.IProdutoService;
 import br.edu.ufape.preco.model.PoliticaPreco;
 import br.edu.ufape.preco.service.interfaces.IPoliticaPrecoService;
 

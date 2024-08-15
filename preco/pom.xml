@@ -14,7 +14,7 @@
 
 	<artifactId>preco</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>catalogo</name>
+	<name>preco</name>
 	<description>Microsservico ecommerce - Preco</description>
 
 	<properties>

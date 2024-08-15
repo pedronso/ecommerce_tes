@@ -22,7 +22,7 @@ import jakarta.persistence.ManyToOne;
 @NoArgsConstructor
 @Entity
 public class Produto {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,5 +32,5 @@ public class Produto {
 
     @ManyToOne
     private Categoria categoria;
-    
+
 }

@@ -1,14 +1,15 @@
 package br.edu.ufape.catalogo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import br.edu.ufape.catalogo.model.Categoria;
+import br.edu.ufape.catalogo.dto.CategoriaRequest;
+import br.edu.ufape.catalogo.dto.CategoriaResponse;
+import br.edu.ufape.catalogo.exceptions.NotFoundException;
 import br.edu.ufape.catalogo.service.interfaces.ICategoriaService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/categorias")
@@ -16,35 +17,51 @@ public class CategoriaController {
 
     private final ICategoriaService categoriaService;
 
-    @Autowired
     public CategoriaController(ICategoriaService categoriaService) {
         this.categoriaService = categoriaService;
     }
 
-    @GetMapping
-    public List<Categoria> getAllCategorias() {
-        return categoriaService.findAll();
+    @PostMapping
+    public ResponseEntity<CategoriaResponse> createCategoria(@RequestBody CategoriaRequest categoriaRequest) {
+
+        CategoriaRequest categoriaForSave = new CategoriaRequest();
+        categoriaForSave.setNome(categoriaRequest.getNome());
+        categoriaForSave.setDescricao(categoriaRequest.getDescricao());
+        categoriaForSave.setId(null);
+
+        try {
+            CategoriaResponse savedCategoriaResponse = categoriaService.save(categoriaForSave);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedCategoriaResponse);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> getCategoriaById(@PathVariable Long id) {
-        Optional<Categoria> categoria = categoriaService.findById(id);
-        return categoria.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<CategoriaResponse> getCategoriaById(@PathVariable Long id) {
+        try {
+            CategoriaResponse categoriaResponse = categoriaService.findById(id);
+            return ResponseEntity.ok(categoriaResponse);
+        } catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PostMapping
-    public Categoria createCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.save(categoria);
+    @GetMapping
+    public ResponseEntity<List<CategoriaResponse>> getAllCategorias() {
+        List<CategoriaResponse> categorias = categoriaService.findAll();
+        return ResponseEntity.ok(categorias);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> updateCategoria(@PathVariable Long id, @RequestBody Categoria categoria) {
-        Optional<Categoria> existingCategoria = categoriaService.findById(id);
-        if (existingCategoria.isPresent()) {
-            categoria.setId(id);
-            Categoria updatedCategoria = categoriaService.save(categoria);
-            return ResponseEntity.ok(updatedCategoria);
-        } else {
+    public ResponseEntity<CategoriaResponse> updateCategoria(@PathVariable Long id,
+            @RequestBody CategoriaRequest categoriaRequest) {
+        categoriaRequest.setId(id);
+
+        try {
+            CategoriaResponse updatedCategoriaResponse = categoriaService.save(categoriaRequest);
+            return ResponseEntity.ok(updatedCategoriaResponse);
+        } catch (NotFoundException e) {
             return ResponseEntity.notFound().build();
         }
     }

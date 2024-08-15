@@ -27,7 +27,7 @@ public class CategoriaController {
         CategoriaRequest categoriaForSave = new CategoriaRequest();
         categoriaForSave.setNome(categoriaRequest.getNome());
         categoriaForSave.setDescricao(categoriaRequest.getDescricao());
-        categoriaForSave.setId(null); // Define o ID como null para criação
+        categoriaForSave.setId(null);
 
         try {
             CategoriaResponse savedCategoriaResponse = categoriaService.save(categoriaForSave);

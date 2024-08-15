@@ -37,7 +37,7 @@ public class CategoriaServiceImpl implements ICategoriaService {
     @Override
     public CategoriaResponse findById(Long id) throws NotFoundException {
         Categoria categoria = categoriaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("It doesn't exist Category with id = " + id));
+                .orElseThrow(() -> new NotFoundException("Categoria não encontrada com o ID = " + id));
 
         return new CategoriaResponse(categoria);
     }

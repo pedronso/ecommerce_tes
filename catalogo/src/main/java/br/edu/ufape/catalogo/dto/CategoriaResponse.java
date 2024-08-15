@@ -17,14 +17,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class CategoriaResponse {
 
-    private Long id;
-    private String nome;
-    private String descricao;
+  private Long id;
+  private String nome;
+  private String descricao;
 
-    public CategoriaResponse(Categoria c) {
-		this.id = c.getId();
-		this.nome = c.getNome();
-		this.descricao = c.getDescricao();
-	}
+  public CategoriaResponse(Categoria c) {
+    this.id = c.getId();
+    this.nome = c.getNome();
+    this.descricao = c.getDescricao();
+  }
 
 }

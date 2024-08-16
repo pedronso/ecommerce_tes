@@ -3,9 +3,9 @@ package br.edu.ufape.estoque.controller.dto.response;
 import java.util.Date;
 
 import br.edu.ufape.estoque.model.Saida;
-import lombok.Setter;
+import lombok.Getter;
 
-@Setter
+@Getter
 public class SaidaResponse {
 	private Long id;
 	private int qtd;

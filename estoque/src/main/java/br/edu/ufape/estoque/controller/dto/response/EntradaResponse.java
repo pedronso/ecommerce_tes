@@ -3,9 +3,10 @@ package br.edu.ufape.estoque.controller.dto.response;
 import java.util.Date;
 
 import br.edu.ufape.estoque.model.Entrada;
+import lombok.Getter;
 import lombok.Setter;
 
-@Setter
+@Getter
 public class EntradaResponse {
 	private Long id;
 	private int qtd;

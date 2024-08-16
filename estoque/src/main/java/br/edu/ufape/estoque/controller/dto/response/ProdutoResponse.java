@@ -1,9 +1,9 @@
 package br.edu.ufape.estoque.controller.dto.response;
 
 import br.edu.ufape.estoque.model.Produto;
-import lombok.Setter;
+import lombok.Getter;
 
-@Setter
+@Getter
 public class ProdutoResponse {
 	private Long id;
 	private int qtd_max;

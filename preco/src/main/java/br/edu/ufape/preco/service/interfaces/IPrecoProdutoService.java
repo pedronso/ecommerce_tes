@@ -10,5 +10,5 @@ public interface IPrecoProdutoService {
     Optional<PrecoProduto> findById(Long id);
     List<PrecoProduto> findAll();
     void deleteById(Long id);
-//	Optional<String> findPoliticaDescricaoById(Long id);
+	Optional<String> findPoliticaDescricaoById(Long id);
 }

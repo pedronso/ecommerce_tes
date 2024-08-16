@@ -40,6 +40,12 @@ public class PrecoProdutoServiceImpl implements IPrecoProdutoService {
         precoProdutoRepository.deleteById(id);
     }
 
+	@Override
+	public Optional<String> findPoliticaDescricaoById(Long id) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
  //   public Optional<String> findPoliticaDescricaoById(Long id) {
  //       Optional<PrecoProduto> precoProduto = precoProdutoRepository.findById(id);
  //       return precoProduto.map(pp -> pp.getPoliticaPreco().getDescricao());

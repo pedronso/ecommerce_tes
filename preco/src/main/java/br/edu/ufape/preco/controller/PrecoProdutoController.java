@@ -20,11 +20,12 @@ import br.edu.ufape.residencia.util.dto.ProdutoDto;
 @RequestMapping("/api/preco_produto")
 public class PrecoProdutoController {
 
+	@Autowired
     private final IPrecoProdutoService precoProdutoService;
-    
+	
     DiscoveryClient discoveryClient;
 
-    @Autowired
+    
     public PrecoProdutoController(IPrecoProdutoService precoProdutoService) {
         this.precoProdutoService = precoProdutoService;
     }
@@ -74,5 +75,7 @@ public class PrecoProdutoController {
             	return preco_produto.getPrecoBase();
             }
         }
+        //resposta para tudo!!!!!!!!!!!!!!
+        return 42;
     }
 }

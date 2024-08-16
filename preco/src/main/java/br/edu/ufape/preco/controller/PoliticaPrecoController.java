@@ -21,9 +21,10 @@ import br.edu.ufape.preco.service.interfaces.IPoliticaPrecoService;
 @RequestMapping("/api/politica_preco")
 public class PoliticaPrecoController {
 
+	@Autowired
 	private final IPoliticaPrecoService politicaPrecoService;
 	
-	@Autowired
+	
 	public PoliticaPrecoController(IPoliticaPrecoService politicaPrecoService) {
 		this.politicaPrecoService = politicaPrecoService;
 	}
@@ -66,7 +67,8 @@ public class PoliticaPrecoController {
     public ResponseEntity<PoliticaPreco> connectWithProduto(@PathVariable Long id, @RequestBody long produto_id) {
         Optional<PoliticaPreco> existingProduto = politicaPrecoService.findById(id);
         if (existingProduto.isPresent()) {
-        	existingProduto.setId(id);
+        	PoliticaPreco politicaPreco = existingProduto.get();
+        	politicaPreco.setId(id);
             PoliticaPreco updatedPoliticaPreco = politicaPrecoService.save(politicaPreco);
             return ResponseEntity.ok(updatedPoliticaPreco);
         } else {

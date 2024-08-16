@@ -4,8 +4,9 @@ import lombok.Data;
 
 @Data
 public class ProdutoDto {
-	    private String nome;
-	    private String descricao;
-	    private CategoriaDto categoria;
+	private Long id;
+	private String nome;
+	private String descricao;
+	private CategoriaDto categoria;
 
 }

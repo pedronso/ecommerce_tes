@@ -1,15 +1,19 @@
 package br.edu.ufape.catalogo.service.interfaces;
 
 import java.util.List;
-import java.util.Optional;
 
-import br.edu.ufape.catalogo.model.Produto;
+import br.edu.ufape.catalogo.dto.ProdutoRequest;
+import br.edu.ufape.catalogo.dto.ProdutoResponse;
+import br.edu.ufape.catalogo.exceptions.NotFoundException;
 
 public interface IProdutoService {
 
-    Produto save(Produto produto);
-    Optional<Produto> findById(Long id);
-    List<Produto> findAll();
+    ProdutoResponse save(ProdutoRequest produto) throws NotFoundException;
+
+    ProdutoResponse findById(Long id) throws NotFoundException;
+
+    List<ProdutoResponse> findAll();
+
     void deleteById(Long id);
 
 }

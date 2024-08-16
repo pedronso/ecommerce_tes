@@ -11,7 +11,7 @@ public interface IPoliticaPrecoService {
     Optional<PoliticaPreco> findById(Long id);
     List<PoliticaPreco> findAll();
     void deleteById(Long id);
-    public List<PoliticaPreco> findByPoliticaPreco_nome(String nome);
-    public List<PoliticaPreco> findByPoliticaPreco_desconto(int desconto);
+ //   public List<PoliticaPreco> findByPoliticaPreco_nome(String nome);
+ //   public List<PoliticaPreco> findByPoliticaPreco_desconto(int desconto);
 
 }

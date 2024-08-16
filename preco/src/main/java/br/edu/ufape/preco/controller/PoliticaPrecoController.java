@@ -45,7 +45,7 @@ public class PoliticaPrecoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PoliticaPreco> updateProduto(@PathVariable Long id, @RequestBody PoliticaPreco politicaPreco) {
+    public ResponseEntity<PoliticaPreco> updatePoliticaPreco(@PathVariable Long id, @RequestBody PoliticaPreco politicaPreco) {
         Optional<PoliticaPreco> existingProduto = politicaPrecoService.findById(id);
         if (existingProduto.isPresent()) {
         	politicaPreco.setId(id);
@@ -60,5 +60,17 @@ public class PoliticaPrecoController {
     public ResponseEntity<Void> deleteProduto(@PathVariable Long id) {
     	politicaPrecoService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+    
+    @PutMapping("/produto/{id}")
+    public ResponseEntity<PoliticaPreco> connectWithProduto(@PathVariable Long id, @RequestBody long produto_id) {
+        Optional<PoliticaPreco> existingProduto = politicaPrecoService.findById(id);
+        if (existingProduto.isPresent()) {
+        	existingProduto.setId(id);
+            PoliticaPreco updatedPoliticaPreco = politicaPrecoService.save(politicaPreco);
+            return ResponseEntity.ok(updatedPoliticaPreco);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

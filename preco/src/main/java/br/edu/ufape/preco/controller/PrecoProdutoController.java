@@ -21,7 +21,7 @@ import br.edu.ufape.residencia.util.dto.ProdutoDto;
 public class PrecoProdutoController {
 
     private final IPrecoProdutoService precoProdutoService;
-    @Autowired
+    
     DiscoveryClient discoveryClient;
 
     @Autowired

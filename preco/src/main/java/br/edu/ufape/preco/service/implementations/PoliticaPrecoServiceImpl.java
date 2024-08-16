@@ -38,13 +38,13 @@ public class PoliticaPrecoServiceImpl implements IPoliticaPrecoService {
 		politicaPrecoRepository.deleteById(id);
 	}
 	
-	@Override
-	public List<PoliticaPreco> findByPoliticaPreco_nome(String nome) {
-		return politicaPrecoRepository.findByPoliticaPreco_nome(nome);
-	}
+//	@Override
+//	public List<PoliticaPreco> findByPoliticaPreco_nome(String nome) {
+//		return politicaPrecoRepository.findByPoliticaPreco_nome(nome);
+//	}
 	
-	@Override
-	public List<PoliticaPreco> findByPoliticaPreco_desconto(int desconto) {
-		return politicaPrecoRepository.findByPoliticaPreco_desconto(desconto);
-	}
+//	@Override
+//	public List<PoliticaPreco> findByPoliticaPreco_desconto(int desconto) {
+//		return politicaPrecoRepository.findByPoliticaPreco_desconto(desconto);
+//	}
 }

@@ -40,8 +40,8 @@ public class PrecoProdutoServiceImpl implements IPrecoProdutoService {
         precoProdutoRepository.deleteById(id);
     }
 
-    public Optional<String> findPoliticaDescricaoById(Long id) {
-        Optional<PrecoProduto> precoProduto = precoProdutoRepository.findById(id);
-        return precoProduto.map(pp -> pp.getPoliticaPreco().getDescricao());
-    }
+ //   public Optional<String> findPoliticaDescricaoById(Long id) {
+ //       Optional<PrecoProduto> precoProduto = precoProdutoRepository.findById(id);
+ //       return precoProduto.map(pp -> pp.getPoliticaPreco().getDescricao());
+ //   }
 }

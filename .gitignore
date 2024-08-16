@@ -98,3 +98,7 @@ Thumbs.db
 
 # binary should not be on the repository
 .bin/
+
+
+
+.metadata/.plugins/

@@ -66,8 +66,8 @@ public class PoliticaPrecoController {
     public ResponseEntity<PoliticaPreco> connectWithProduto(@PathVariable Long id, @RequestBody long produto_id) {
         Optional<PoliticaPreco> existingProduto = politicaPrecoService.findById(id);
         if (existingProduto.isPresent()) {
-        	existingProduto.setId(id);
-            PoliticaPreco updatedPoliticaPreco = politicaPrecoService.save(politicaPreco);
+        	existingProduto.get().setId(id);
+            PoliticaPreco updatedPoliticaPreco = politicaPrecoService.save(existingProduto.get());
             return ResponseEntity.ok(updatedPoliticaPreco);
         } else {
             return ResponseEntity.notFound().build();

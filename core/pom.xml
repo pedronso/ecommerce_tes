@@ -4,14 +4,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>br.edu.ufape.topicos</groupId>
-		<artifactId>br.edu.ufape.topicos.ecommerce</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
-
 	<packaging>jar</packaging>
 
+	<groupId>br.edu.ufape.topicos</groupId>
 	<artifactId>core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>core</name>
@@ -20,16 +15,15 @@
 	<properties>
 
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.34</version>
+			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
-
-
-
 
 </project>

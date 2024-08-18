@@ -52,11 +52,11 @@ public class PrecoProdutoController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/politica")
-    public ResponseEntity<String> getPoliticaPrecoDescricaoById(@PathVariable Long id) {
-        Optional<String> politicaDescricao = precoProdutoService.findPoliticaDescricaoById(id);
-        return politicaDescricao.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    // @GetMapping("/{id}/politica")
+    // public ResponseEntity<String> getPoliticaPrecoDescricaoById(@PathVariable Long id) {
+    //     Optional<String> politicaDescricao = precoProdutoService.findPoliticaDescricaoById(id);
+    //     return politicaDescricao.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    // }
     
     public double getPriceForProduct(Long productId) {
         // Use DiscoveryClient to find instances of catalog service
@@ -74,5 +74,6 @@ public class PrecoProdutoController {
             	return preco_produto.getPrecoBase();
             }
         }
+        return 0.0;
     }
 }

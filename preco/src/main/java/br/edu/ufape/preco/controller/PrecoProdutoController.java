@@ -3,6 +3,7 @@ package br.edu.ufape.preco.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import br.edu.ufape.preco.model.PrecoProduto;
+import br.edu.ufape.preco.service.MessageProducer;
 import br.edu.ufape.preco.service.interfaces.IPrecoProdutoService;
 import br.edu.ufape.residencia.util.dto.ProdutoDto;
 
@@ -78,5 +80,14 @@ public class PrecoProdutoController {
             }
         }
         return 0.0;
+    }
+    
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+    
+    @GetMapping("/test")
+    public void test_rabbit() {
+        MessageProducer message_producer = new MessageProducer(rabbitTemplate);
+        message_producer.sendMessage("preco_exchange", "preco_routing_key", "catalogo_message");
     }
 }

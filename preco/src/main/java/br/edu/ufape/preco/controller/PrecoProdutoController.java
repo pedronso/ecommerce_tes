@@ -5,12 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.DiscoveryClient;
 
 import br.edu.ufape.preco.model.PrecoProduto;
 import br.edu.ufape.preco.service.interfaces.IPrecoProdutoService;
@@ -21,12 +19,14 @@ import br.edu.ufape.residencia.util.dto.ProdutoDto;
 public class PrecoProdutoController {
 
     private final IPrecoProdutoService precoProdutoService;
-    
-    DiscoveryClient discoveryClient;
+    private final DiscoveryClient discoveryClient;
+    private final RestTemplate restTemplate;
 
     @Autowired
-    public PrecoProdutoController(IPrecoProdutoService precoProdutoService) {
+    public PrecoProdutoController(IPrecoProdutoService precoProdutoService, DiscoveryClient discoveryClient, RestTemplate restTemplate) {
         this.precoProdutoService = precoProdutoService;
+        this.discoveryClient = discoveryClient;
+        this.restTemplate = restTemplate;
     }
 
     @GetMapping
@@ -45,33 +45,36 @@ public class PrecoProdutoController {
         return precoProdutoService.save(precoProduto);
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePrecoProduto(@PathVariable Long id) {
         precoProdutoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-    // @GetMapping("/{id}/politica")
-    // public ResponseEntity<String> getPoliticaPrecoDescricaoById(@PathVariable Long id) {
-    //     Optional<String> politicaDescricao = precoProdutoService.findPoliticaDescricaoById(id);
-    //     return politicaDescricao.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    // }
-    
-    public double getPriceForProduct(Long productId) {
+    @GetMapping("/price_product/{productId}")
+    public double getPriceForProduct(@PathVariable Long productId) {
         // Use DiscoveryClient to find instances of catalog service
-        InstanceInfo instance = discoveryClient.getNextServerFromEureka("Catalogo", false);
+        List<ServiceInstance> instances = discoveryClient.getInstances("Catalogo");
+        if (instances.isEmpty()) {
+            throw new RuntimeException("No instances found for 'Catalogo'");
+        }
+        ServiceInstance serviceInstance = instances.get(0);
 
-        String url = instance.getHomePageUrl() + "api/produtos/" + productId;
+        // Construct URL for the catalog service
+        String url = serviceInstance.getUri() + "/api/produtos/" + productId;
 
         // Make REST call to catalog service
-        RestTemplate restTemplate = new RestTemplate();
         ProdutoDto product = restTemplate.getForObject(url, ProdutoDto.class);
 
-        List<PrecoProduto> preco_produtos = getAllPrecoProdutos();
-        for (PrecoProduto preco_produto : preco_produtos) {
-            if (preco_produto.getId() == product.getId()) {
-            	return preco_produto.getPrecoBase();
+        // Check if the product was retrieved
+        if (product == null) {
+            throw new RuntimeException("Product not found");
+        }
+
+        List<PrecoProduto> precoProdutos = precoProdutoService.findAll();
+        for (PrecoProduto precoProduto : precoProdutos) {
+            if (precoProduto.getId().equals(product.getId())) {
+                return precoProduto.getPrecoBase();
             }
         }
         return 0.0;

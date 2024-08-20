@@ -54,7 +54,7 @@ public class PrecoProdutoController {
     @GetMapping("/price_product/{productId}")
     public double getPriceForProduct(@PathVariable Long productId) {
         // Use DiscoveryClient to find instances of catalog service
-        List<ServiceInstance> instances = discoveryClient.getInstances("Catalogo");
+        List<ServiceInstance> instances = discoveryClient.getInstances("catalogo");
         if (instances.isEmpty()) {
             throw new RuntimeException("No instances found for 'Catalogo'");
         }
@@ -73,7 +73,7 @@ public class PrecoProdutoController {
 
         List<PrecoProduto> precoProdutos = precoProdutoService.findAll();
         for (PrecoProduto precoProduto : precoProdutos) {
-            if (precoProduto.getId().equals(product.getId())) {
+            if (precoProduto.getProduto_id().equals(product.getId())) {
                 return precoProduto.getPrecoBase();
             }
         }

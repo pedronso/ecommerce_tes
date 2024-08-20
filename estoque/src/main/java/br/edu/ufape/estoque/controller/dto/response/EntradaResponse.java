@@ -4,7 +4,6 @@ import java.util.Date;
 
 import br.edu.ufape.estoque.model.Entrada;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class EntradaResponse {

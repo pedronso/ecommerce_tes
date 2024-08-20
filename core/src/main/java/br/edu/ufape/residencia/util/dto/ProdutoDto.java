@@ -7,6 +7,6 @@ public class ProdutoDto {
 		private Long id;
 	    private String nome;
 	    private String descricao;
-	    private CategoriaDto categoria;
+	    private Long categoriaId;
 
 }

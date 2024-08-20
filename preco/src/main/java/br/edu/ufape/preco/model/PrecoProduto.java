@@ -18,7 +18,7 @@ public class PrecoProduto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private long[] produto_id;
+    private Long produto_id;
 
     private Double precoBase;
 

@@ -8,6 +8,7 @@ import br.edu.ufape.catalogo.dto.CategoriaRequest;
 import br.edu.ufape.catalogo.dto.CategoriaResponse;
 import br.edu.ufape.catalogo.exceptions.NotFoundException;
 import br.edu.ufape.catalogo.service.interfaces.ICategoriaService;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoriaResponse> createCategoria(@RequestBody CategoriaRequest categoriaRequest) {
+    public ResponseEntity<CategoriaResponse> createCategoria(@Valid @RequestBody CategoriaRequest categoriaRequest) {
 
         CategoriaRequest categoriaForSave = new CategoriaRequest();
         categoriaForSave.setNome(categoriaRequest.getNome());
@@ -55,7 +56,7 @@ public class CategoriaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaResponse> updateCategoria(@PathVariable Long id,
-            @RequestBody CategoriaRequest categoriaRequest) {
+            @Valid @RequestBody CategoriaRequest categoriaRequest) {
         categoriaRequest.setId(id);
 
         try {

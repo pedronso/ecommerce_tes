@@ -8,6 +8,7 @@ import br.edu.ufape.catalogo.dto.ProdutoRequest;
 import br.edu.ufape.catalogo.dto.ProdutoResponse;
 import br.edu.ufape.catalogo.exceptions.NotFoundException;
 import br.edu.ufape.catalogo.service.interfaces.IProdutoService;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoResponse> createProduto(@RequestBody ProdutoRequest produtoRequest) {
+    public ResponseEntity<ProdutoResponse> createProduto(@Valid @RequestBody ProdutoRequest produtoRequest) {
         try {
             ProdutoResponse savedProdutoResponse = produtoService.save(produtoRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedProdutoResponse);
@@ -49,7 +50,7 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProdutoResponse> updateProduto(@PathVariable Long id,
-            @RequestBody ProdutoRequest produtoRequest) {
+            @Valid @RequestBody ProdutoRequest produtoRequest) {
         produtoRequest.setId(id);
 
         try {

@@ -18,7 +18,7 @@ import br.edu.ufape.preco.model.PoliticaPreco;
 import br.edu.ufape.preco.service.interfaces.IPoliticaPrecoService;
 
 @RestController
-@RequestMapping("/api/politica_preco")
+@RequestMapping("/api/preco/politica_preco")
 public class PoliticaPrecoController {
 
 	private final IPoliticaPrecoService politicaPrecoService;

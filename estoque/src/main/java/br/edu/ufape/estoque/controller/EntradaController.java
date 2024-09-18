@@ -20,7 +20,7 @@ import br.edu.ufape.estoque.controller.dto.response.EntradaResponse;
 import br.edu.ufape.estoque.facade.Facade;
 
 @RestController
-@RequestMapping("/api/entrada")
+@RequestMapping("/api/estoque/entrada")
 public class EntradaController {
 
 	@Autowired

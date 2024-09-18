@@ -20,7 +20,7 @@ import br.edu.ufape.estoque.controller.dto.response.SaidaResponse;
 import br.edu.ufape.estoque.facade.Facade;
 
 @RestController
-@RequestMapping("/api/saida")
+@RequestMapping("/api/estoque/saida")
 public class SaidaController {
 	@Autowired
 	private Facade facade;

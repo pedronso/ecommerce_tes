@@ -13,7 +13,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/produtos")
+@RequestMapping("/api/catalogo/produtos")
 public class ProdutoController {
 
     private final IProdutoService produtoService;

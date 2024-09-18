@@ -13,7 +13,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categorias")
+@RequestMapping("/api/catalogo/categorias")
 public class CategoriaController {
 
     private final ICategoriaService categoriaService;

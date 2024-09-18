@@ -17,7 +17,7 @@ import br.edu.ufape.preco.service.interfaces.IPrecoProdutoService;
 import br.edu.ufape.residencia.util.dto.ProdutoDto;
 
 @RestController
-@RequestMapping("/api/preco_produto")
+@RequestMapping("/api/preco/preco_produto")
 public class PrecoProdutoController {
 
     private final IPrecoProdutoService precoProdutoService;
@@ -63,7 +63,7 @@ public class PrecoProdutoController {
         ServiceInstance serviceInstance = instances.get(0);
 
         // Construct URL for the catalog service
-        String url = serviceInstance.getUri() + "/api/produtos/" + productId;
+        String url = serviceInstance.getUri() + "/api/catalogo/produtos/" + productId;
 
         // Make REST call to catalog service
         ProdutoDto product = restTemplate.getForObject(url, ProdutoDto.class);

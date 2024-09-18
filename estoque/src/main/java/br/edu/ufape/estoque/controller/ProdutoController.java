@@ -20,7 +20,7 @@ import br.edu.ufape.estoque.controller.dto.response.ProdutoResponse;
 import br.edu.ufape.estoque.facade.Facade;
 
 @RestController
-@RequestMapping("/api/produto")
+@RequestMapping("/api/estoque/produto")
 public class ProdutoController {
 	@Autowired
 	private Facade facade;

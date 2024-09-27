@@ -1,11 +1,11 @@
 package br.edu.ufape.preco.service.implementations;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.preco.exceptions.NotFoundException;
 import br.edu.ufape.preco.model.PrecoProduto;
 import br.edu.ufape.preco.repository.PrecoProdutoRepository;
 import br.edu.ufape.preco.service.interfaces.IPrecoProdutoService;
@@ -26,8 +26,9 @@ public class PrecoProdutoServiceImpl implements IPrecoProdutoService {
     }
 
     @Override
-    public Optional<PrecoProduto> findById(Long id) {
-        return precoProdutoRepository.findById(id);
+    public PrecoProduto findById(Long id) throws NotFoundException {
+        return precoProdutoRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException("Preço do Produto não encontrado para o ID: " + id));
     }
 
     @Override
@@ -36,9 +37,11 @@ public class PrecoProdutoServiceImpl implements IPrecoProdutoService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        precoProdutoRepository.deleteById(id);
+    public void deleteById(Long id) throws NotFoundException {
+        PrecoProduto precoProduto = findById(id); // Lança NotFoundException se não encontrar
+        precoProdutoRepository.deleteById(precoProduto.getId());
     }
+
 
  //   public Optional<String> findPoliticaDescricaoById(Long id) {
  //       Optional<PrecoProduto> precoProduto = precoProdutoRepository.findById(id);

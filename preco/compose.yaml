@@ -2,16 +2,26 @@ services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      - 'POSTGRES_DB=preco'
+      - 'POSTGRES_PASSWORD=admin'
+      - 'POSTGRES_USER=admin'
     ports:
       - '5432'
+    network_mode: host
   rabbitmq:
     image: rabbitmq:management
     ports:
       - "5672:5672"
       - "15672:15672"
+    network_mode: host
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+  zipkin:
+    image: 'openzipkin/zipkin'
+    environment:
+       - RABBIT_ADDRESSES=rabbitmq
+       - STORAGE_TYPE=mem
+    ports:
+      - "9411:9411"
+    network_mode: host

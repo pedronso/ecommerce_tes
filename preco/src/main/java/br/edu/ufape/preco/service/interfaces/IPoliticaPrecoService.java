@@ -1,17 +1,17 @@
 package br.edu.ufape.preco.service.interfaces;
 
-import java.util.List;
-import java.util.Optional;
-
 import br.edu.ufape.preco.model.PoliticaPreco;
+import br.edu.ufape.preco.exceptions.NotFoundException;
+
+import java.util.List;
 
 public interface IPoliticaPrecoService {
-	
-	PoliticaPreco save(PoliticaPreco politica_preco);
-    Optional<PoliticaPreco> findById(Long id);
-    List<PoliticaPreco> findAll();
-    void deleteById(Long id);
- //   public List<PoliticaPreco> findByPoliticaPreco_nome(String nome);
- //   public List<PoliticaPreco> findByPoliticaPreco_desconto(int desconto);
+    
+    PoliticaPreco save(PoliticaPreco politicaPreco);
 
+    PoliticaPreco findById(Long id) throws NotFoundException;
+
+    List<PoliticaPreco> findAll();
+
+    void deleteById(Long id) throws NotFoundException;
 }

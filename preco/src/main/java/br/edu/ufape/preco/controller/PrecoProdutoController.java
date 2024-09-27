@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import br.edu.ufape.preco.exceptions.NotFoundException;
 import br.edu.ufape.preco.model.PrecoProduto;
 import br.edu.ufape.preco.service.MessageProducer;
 import br.edu.ufape.preco.service.interfaces.IPrecoProdutoService;
@@ -37,9 +38,9 @@ public class PrecoProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PrecoProduto> getPrecoProdutoById(@PathVariable Long id) {
-        Optional<PrecoProduto> precoProduto = precoProdutoService.findById(id);
-        return precoProduto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<PrecoProduto> getPrecoProdutoById(@PathVariable Long id) throws NotFoundException {
+        PrecoProduto precoProduto = precoProdutoService.findById(id);
+        return ResponseEntity.ok(precoProduto);
     }
 
     @PostMapping
@@ -48,7 +49,7 @@ public class PrecoProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePrecoProduto(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePrecoProduto(@PathVariable Long id) throws NotFoundException {
         precoProdutoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

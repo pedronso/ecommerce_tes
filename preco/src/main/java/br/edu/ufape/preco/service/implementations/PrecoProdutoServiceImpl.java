@@ -38,7 +38,7 @@ public class PrecoProdutoServiceImpl implements IPrecoProdutoService {
 
     @Override
     public void deleteById(Long id) throws NotFoundException {
-        PrecoProduto precoProduto = findById(id); // Lança NotFoundException se não encontrar
+        PrecoProduto precoProduto = findById(id);
         precoProdutoRepository.deleteById(precoProduto.getId());
     }
 

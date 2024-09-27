@@ -15,15 +15,28 @@ public class ResourceServerConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-                .antMatchers("/security/**").authenticated()
-                .anyRequest().permitAll()
-            .and()
+        http/*
+            .authorizeRequests().requestMatchers("/security/**")
+            .authenticated().anyRequest().permitAll()
             .oauth2ResourceServer()
                 .jwt()
                 .jwtAuthenticationConverter(keycloakJwtAuthenticationConverter);
-
+ */
+                .authorizeRequests((authorizeRequests) ->
+                                authorizeRequests
+                                        .anyRequest().authenticated()
+                        )
+                        .oauth2ResourceServer((oauth2ResourceServer) ->
+                                oauth2ResourceServer
+                                        .jwt((jwt) ->
+                                                jwt.jwtAuthenticationConverter(keycloakJwtAuthenticationConverter)
+                                        )
+                        );
         return http.build();
+    }
+
+    @Bean
+    public jwtDecoder jwtDecoder() {
+        return NimbusJwtDecoder.withPublicKey(this.key).build();
     }
 }

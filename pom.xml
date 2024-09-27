@@ -8,7 +8,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.0</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath />
 	</parent>
 
 	<groupId>br.edu.ufape.topicos</groupId>
@@ -18,13 +18,13 @@
 	<name>ecommerce</name>
 
 	<modules>
+		<module>auth</module>
 		<module>catalogo</module>
 		<module>estoque</module>
 		<module>preco</module>
 		<module>core</module>
 		<module>discovery</module>
 		<module>gateway</module>
-
 	</modules>
 
 	<properties>
@@ -101,16 +101,21 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>repackage</id>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<skip>true</skip> 
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
+	
 
 </project>

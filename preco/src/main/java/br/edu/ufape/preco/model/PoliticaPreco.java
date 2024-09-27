@@ -21,5 +21,5 @@ public class PoliticaPreco {
 	private String nome;
 	private String descricao;
 	private int desconto;
-	private long[] produto_id;
+	private long produto_id;
 }
